@@ -1,0 +1,1 @@
+mpic++ main.cpp Common.h Server.h Server.cpp Operator.h Operator.cpp
