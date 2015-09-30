@@ -4,11 +4,15 @@
 
 using namespace std;
 
+Operator::Operator(int size): _size(size) {
+
+}
+
 int Operator::be_operator() const {
   int tag = 1;
   MPI_Status stat;
   list<MPIListNode*> messages;
-  for(int i=1; i<NUMBER_OF_PROCESSORS ; ++i)
+  for(int i=1; i<_size ; ++i)
   {
     MPIListNode* node = new MPIListNode();
     MPI_Recv(&(node->buff), SIZE_OF_DATA+1, MPI_DOUBLE,MPI_ANY_SOURCE, tag, MPI_COMM_WORLD, &stat);

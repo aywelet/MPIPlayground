@@ -4,8 +4,11 @@
 
 class Operator
 {
+  private:
+    int _size;
   public:
     int be_operator() const;
+    Operator(int size);
 };
 
 

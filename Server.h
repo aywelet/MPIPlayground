@@ -2,25 +2,25 @@
 #ifndef __Server__
 #define __Server__
 
-#define SLEEP_TIME 60
-
 class Server
 {
   private:
+  
+    static const int SLEEP_TIME = 60;
     
-	// Members
-	bool _isOperatorExist;
-	int _node;
+    // Members
+    bool _isOperatorExist;
+    int _node, _size;
 	
-	// Methods
+    // Methods
     int get_send_list() const;
-	int get_recv_list() const;
+    int get_recv_list() const;
 	
-	void send_list(double* buff,int op, int tag) const;
-	void recv_list(double* buff,int op, int tag) const;
+    void send_list(double* buff,int op, int tag) const;
+    void recv_list(double* buff,int op, int tag) const;
   
   public:
-    Server(int node, bool isOperatorExist); 
+    Server(int node, int size, bool isOperatorExist); 
     int be_server() const;
 };
 

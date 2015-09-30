@@ -5,7 +5,6 @@
 #include <mpi.h>
 
 #define SIZE_OF_DATA 100
-#define NUMBER_OF_PROCESSORS 8 
 
 struct MPIListNode
 {

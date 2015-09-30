@@ -8,9 +8,9 @@ int Server::get_send_list() const {
   //list<int> listi;
   if (!_isOperatorExist)
   {
-	  return (_node+1)%NUMBER_OF_PROCESSORS;
+	  return (_node+1)%_size;
   }
-  int nextNode = _node%(NUMBER_OF_PROCESSORS - 1) + 1;
+  int nextNode = _node%(_size - 1) + 1;
   return nextNode;
 }
 
@@ -18,9 +18,9 @@ int Server::get_recv_list() const {
   //list<int> listi;
   if (!_isOperatorExist)
   {
-	  return (_node-1)%NUMBER_OF_PROCESSORS;
+	  return (_node-1)%_size;
   }
-  int nextNode = (_node-2)%(NUMBER_OF_PROCESSORS - 1) + 1;
+  int nextNode = (_node-2)%(_size - 1) + 1;
   return nextNode;
 }
 
@@ -29,7 +29,7 @@ void Server::send_list(double* buff,int op, int tag) const {
   buff[0] = _node;
   buff[1] = sendList;
   int toSend = _isOperatorExist ? op : sendList;
-  MPI_Ssend(buff, SIZE_OF_DATA+1, MPI_DOUBLE, toSend, tag , MPI_COMM_WORLD);
+  MPI_Send(buff, SIZE_OF_DATA+1, MPI_DOUBLE, toSend, tag , MPI_COMM_WORLD);
 }
 
 void Server::recv_list(double* buff,int op, int tag) const {
@@ -40,7 +40,7 @@ void Server::recv_list(double* buff,int op, int tag) const {
 }
 
 
-Server::Server(int node, bool isOperatorExist):_isOperatorExist(isOperatorExist),_node(node) {
+Server::Server(int node, int size, bool isOperatorExist):_isOperatorExist(isOperatorExist),_node(node),_size(size) {
 	
 }
 
